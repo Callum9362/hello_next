@@ -18,6 +18,7 @@ const Index = ({musicData}) => {
     );
 }
 
+// API hits 404 
 Index.getInitialProps = async function() {
     const response = await fetch(`https://www.what-song.com/api/recent-movies`);
     const result = await response.json();
