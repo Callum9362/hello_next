@@ -7,7 +7,7 @@ const Index = ({coinData}) => {
         <Layout>
             <div>
                 <h3>Coins List</h3>
-                    <table class="table">
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col">Symbol</th>
@@ -37,7 +37,7 @@ const Index = ({coinData}) => {
                                             { item.name }
                                         </td>
                                         <td>
-                                            { '$' + item.current_price.toFixed(2) }
+                                            <span className={highlight(item.price_change_24h)}> { '$' + item.current_price.toFixed(2) } </span>
                                         </td>
                                         <td>
                                             { item.market_cap }
@@ -56,8 +56,6 @@ const Index = ({coinData}) => {
                 <style jsx>{`
                     .avatar {
                         vertical-align: middle;
-                        width: 50px;
-                        height: 50px;
                         border-radius: 50%;
                       }
                 `}
@@ -65,6 +63,13 @@ const Index = ({coinData}) => {
             </div>
         </Layout>
     );
+}
+
+function highlight(priceChange){
+    return {
+      'text-danger': priceChange < 0,
+      'text-success': priceChange > 0
+    }
 }
 
 Index.getInitialProps = async function() {
